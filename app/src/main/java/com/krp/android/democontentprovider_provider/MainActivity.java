@@ -1,9 +1,14 @@
 package com.krp.android.democontentprovider_provider;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,5 +38,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickAddName(View view) {
+        ContentValues values = new ContentValues();
+        values.put(MyProvider.name, ((EditText) findViewById(R.id.txtName))
+                .getText().toString());
+        Uri uri = getContentResolver().insert(MyProvider.CONTENT_URI, values);
+        Toast.makeText(getBaseContext(), "New record inserted", Toast.LENGTH_LONG)
+                .show();
     }
 }
